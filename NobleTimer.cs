@@ -8,31 +8,30 @@ public class Timer {
 	private System.Timers.Timer systemTimer;
 	private Stopwatch stopwatch;
 	
-	public int currentTickCount;
-	public float tickDuration;
 	public int totalTickCount;
+	public int currentTickCount;
+	
+	public float tickDuration;
+	public double durationRemaining;
+	
 	public bool isRunning;
 
 	public delegate void TimerEvent();
 	public event TimerEvent onTimerTick;
 	public event TimerEvent onTimerComplete;
 
-	private double durationRemaining;
-
 	private SynchronizationContext syncContext;
 
 	public Timer(float _tickDurationInMilliseconds, TimerEvent _onCompleteMethod = null, int _totalTickCount = 1, TimerEvent _onTickMethod = null, bool startUponCreation = false){
 		
-		systemTimer = new System.Timers.Timer();		
-		systemTimer.Interval = _tickDurationInMilliseconds;
-		systemTimer.Elapsed += onTick;
-
+		systemTimer = new System.Timers.Timer();
 		stopwatch = new Stopwatch();
 
 		currentTickCount = 0;
 		totalTickCount = _totalTickCount;
-		tickDuration = _tickDurationInMilliseconds;
-		durationRemaining = _tickDurationInMilliseconds;
+		systemTimer.Interval = durationRemaining = tickDuration = _tickDurationInMilliseconds;
+
+		systemTimer.Elapsed += onTick;
 
 		// Move operations to the main thread (required for certain Unity APIs).
 		//
@@ -82,6 +81,8 @@ public class Timer {
 		stopwatch.Stop();
 		stopwatch.Reset();
 		isRunning = false;
+		currentTickCount = 0;
+		systemTimer.Interval = durationRemaining = tickDuration;
 	}
 
 	public void destroy(){
