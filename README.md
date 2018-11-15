@@ -25,7 +25,7 @@ Timer timer = new Timer(
 
 `pause()`: Pauses timer, resume from where you left off with `start()`.
 
-`stop()`: Stops and resets timer. Can be run again from  with `start()`.
+`stop()`: Stops and resets timer. Can be run again with `start()`.
 
 `destroy()`: stops, destroys, and sets to `null` all internal objects. Only call this if you also intend to set the timer object to `null`.
 
