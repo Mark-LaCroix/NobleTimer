@@ -49,11 +49,14 @@ Timer.TimerEvent timerCompleteHandler = delegate { /* Your code here */ };
 timer = new Timer(500, timerCompleteHandler);
 timer.start();
 ```
-
+You can also use lamba expressions
+```C#
+timer = new Timer(500, ()=>{ /* Your code here */ });
+timer.start();
+```
 The `startUponCreation` bool allows you to start the timer immediately, without having to seperately call `start()` on it:
 ```C#
-Timer.TimerEvent timerCompleteHandler = delegate { /* Your code here */ };
-timer = new Timer(500, timerCompleteHandler, 1, null, true);
+timer = new Timer(500, ()=>{ /* Your code here */ }, 1, null, true);
 ````
 
 Advanced usage (Runs "tick" code every 500ms, and "complete" code at the end of 10 ticks):
