@@ -49,7 +49,7 @@ Timer.TimerEvent timerCompleteHandler = delegate { /* Your code here */ };
 timer = new Timer(500, timerCompleteHandler);
 timer.start();
 ```
-You can also use lamba expressions
+You can also use a lambda function.
 ```C#
 timer = new Timer(500, ()=>{ /* Your code here */ });
 timer.start();
